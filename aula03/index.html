@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Receitas de Cerveja</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <div id="divCervejas"></div>
+
+    <div id="meu amor">
+        <button id="botaoCarregar">Carregar Cervejas</button>
+    </div>
+
+</body>
+
+<script>
+
+    let divCervejas = document.getElementById("divCervejas");
+    let botao = document.getElementById("botaoCarregar");
+
+    function carregarDiv() {
+
+        if (divCervejas.classList.contains("visivel")) {
+            divCervejas.classList.remove("visivel");
+            setTimeout(() => {
+                divCervejas.innerHTML = "";
+            }, 500);
+
+        } else {
+            divCervejas.innerHTML = '<h1>Guinness</h1>';
+            setTimeout(function () {
+                divCervejas.classList.add("visivel");
+            }, 50);
+        }
+        }   
+
+    botao.addEventListener("click", carregarDiv)
+
+</script>
+
+</html>
