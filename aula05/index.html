@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-   </head>
 
-   <body>
-      <div><button id="botaoCarregar">Carregando cervejas...</button></div>
-      <div id="loucura"></div>
-   </body>
+<head>
+   <meta charset="UTF-8">
+   <link href="estilo.css" rel="stylesheet">
+</head>
 
-   <script>
-      let cervejas = ["Guiness", "Desperados", "Becks"]
+<body>
+   <button id="botaoCarregar">Carregando...</button>
+   <button id="botaoOrdenar">Ordenando...</button>
+   <button id="botaoEmbaralhar">Embaralhando...</button>
+   <div id="loucura"></div>
+</body>
 
-      const transformar = item => `<h1>${item}</h1>`
-      
-      const carregarDiv = (cervs) => {
-         const div = document.getElementById("loucura")
+<script>
+   let roupas = ["short", "calça", "blusas", "vestido", "casaco"];
 
-         const cervejasHtml = cervs.map(transformar)
-         div.innerHTML = `${cervejasHtml.join("\n")}`
-      }
+   const transformarTabela = (lista) => {
+      let linhas = lista.map(item => `<tr><td>${item}</td></tr>`).join("\n");
+      return ` 
+         <table>
+            <thead>
+               <tr><th>Peça de Roupa</th></tr>
+            </thead>
+            <tbody>
+               ${linhas}
+            </tbody>
+         </table>
+      `;
+   }
 
-      let botao = document.getElementById("botaoCarregar")
-      botao.addEventListener("click", () => carregarDiv(cervejas))
-   </script>
+   const carregarDivTabela = (lista) => {
+      const div = document.getElementById("loucura")
+
+      div.innerHTML = transformarTabela(lista);
+   };
+
+   const carregarOrdenadas = (lista) => {
+      const div = document.getElementById("loucura");
+
+      let listaOrdenada = [...lista].sort((a, b) => a.localeCompare(b));
+
+      div.innerHTML = transformarTabela(listaOrdenada)
+
+   };
+
+   const carregarEmabaralhadas = (lista) => {
+      const div = document.getElementById("loucura")
+      let listaEmabalhada = [...lista].sort(() => Math.random() - 0.5);
+
+      div.innerHTML = transformarTabela(listaEmabalhada);
+   }
+
+   let botao = document.getElementById("botaoCarregar")
+   botao.addEventListener("click", () => carregarDivTabela(roupas));
+
+   let botaoOrdenar = document.getElementById("botaoOrdenar")
+   botaoOrdenar.addEventListener("click", () => carregarOrdenadas(roupas));
+
+   let botaoEmbaralhar = document.getElementById("botaoEmbaralhar")
+   botaoEmbaralhar.addEventListener("click", () => carregarEmabaralhadas(roupas))
+</script>
+
 </html>

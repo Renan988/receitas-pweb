@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+
+button {
+    padding: 8px 15px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.roupaDiv {
+    background-color: #d7a6eb;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    font-weight: bold;
+    width: 200px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-top: 10px;
+    background-color: #f2f2f2;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
