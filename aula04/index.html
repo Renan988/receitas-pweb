@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .tabelaCervejas {
+            width: 50%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="area-botao">
+        <button id="botaoCarregar">Carregar cervejas.</button>
+        <button id="botaoOrdenar">Mostrar cervejas ordenadas,</button>
+        <button id="botaoEmbaralhar">Embaralhar as Cervejas.</button>
+    </div>
+
+    <div id="meu amor"></div>
+</body>
+
+<script>
+    let cervejas = ["Guiness", "Desperados", "Becks"]
+    let ultimoClique = "";
+
+    function transformar(item) {
+        return `<tr>
+            <td class="cerveja">${item}</td></tr>`;
+    }
+
+    function desenharTabela() {
+        let div = document.getElementById("meu amor")
+        let cervejasHtml = cervejas.map(transformar)
+
+        let tabelaCompleta = `
+        <table class="tabelaCervejas">
+            <thead>
+                <tr>
+                    <th>Nome da Cerveja</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${cervejasHtml.join("\n")}
+            </tbody>
+        </table>
+    `;
+        div.innerHTML = tabelaCompleta
+
+    }
+
+    function carregarDiv() {
+        let div = document.getElementById("meu amor")
+        desenharTabela();
+        if (ultimoClique === "carregar") {
+            div.innerHTML = ""; // Apaga a tabela
+            ultimoClique = "";  // Limpa a memória
+        } else {
+            // Redefinimos o array para garantir a ordem original (caso o .sort tenha bagunçado antes)
+            cervejas = ["Guiness", "Desperados", "Becks"];
+            desenharTabela();
+            ultimoClique = "carregar"; // Salva na memória que esse foi o último botão clicado
+        }
+    }
+
+
+    function ordenarCarregar() {
+        let div = document.getElementById("meu amor")
+        cervejas.sort();
+        desenharTabela();
+        if (ultimoClique === "ordenar") {
+            div.innerHTML = ""; // Apaga a tabela
+            ultimoClique = "";  // Limpa a memória
+        } else {
+            // Redefinimos o array para garantir a ordem original (caso o .sort tenha bagunçado antes)
+            cervejas = ["Guiness", "Desperados", "Becks"];
+            desenharTabela();
+            ultimoClique = "ordenar"; // Salva na memória que esse foi o último botão clicado
+        }
+    }
+
+    function embaralharCarregar() {
+        let div = document.getElementById("meu amor")
+        desenharTabela();
+        cervejas.sort(() => Math.random() - 0.5);
+        desenharTabela();
+    }
+
+    let botao = document.getElementById("botaoCarregar")
+    botao.addEventListener("click", carregarDiv)
+
+    let botaoOrdenar = document.getElementById("botaoOrdenar")
+    botaoOrdenar.addEventListener("click", ordenarCarregar)
+
+    let botaoEmbaralhar = document.getElementById("botaoEmbaralhar")
+    botaoEmbaralhar.addEventListener("click", embaralharCarregar)
+</script>
+
+</html>
