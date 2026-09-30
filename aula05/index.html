@@ -7,9 +7,10 @@
 </head>
 
 <body>
-   <button id="botaoCarregar">Carregando...</button>
-   <button id="botaoOrdenar">Ordenando...</button>
-   <button id="botaoEmbaralhar">Embaralhando...</button>
+   <a href="#" id="linkCarregar" class="linkAcao">Carregar Roupas</a>
+   <a href="#" id="linkOrdenar" class="linkAcao">Carregar Roupas</a>
+   <a href="#" id="linkEmbaralhar" class="linkAcao">Carregar Roupas</a>
+
    <div id="loucura"></div>
 </body>
 
@@ -52,14 +53,20 @@
       div.innerHTML = transformarTabela(listaEmabalhada);
    }
 
-   let botao = document.getElementById("botaoCarregar")
-   botao.addEventListener("click", () => carregarDivTabela(roupas));
+   let linkCarregar = document.getElementById("linkCarregar");
+   linkCarregar.addEventListener("click", (event) => {
+      carregarDivTabela(roupas);
+   });
 
-   let botaoOrdenar = document.getElementById("botaoOrdenar")
-   botaoOrdenar.addEventListener("click", () => carregarOrdenadas(roupas));
+   let linkOrdenar = document.getElementById("linkOrdenar");
+   linkOrdenar.addEventListener("click", (event) => {
+      carregarOrdenadas(roupas);
+   });
 
-   let botaoEmbaralhar = document.getElementById("botaoEmbaralhar")
-   botaoEmbaralhar.addEventListener("click", () => carregarEmabaralhadas(roupas))
+   let linkEmbaralhar = document.getElementById("linkEmbaralhar");
+   linkEmbaralhar.addEventListener("click", (event) => {
+      carregarEmabaralhadas(roupas);
+   });
 </script>
 
 </html>
