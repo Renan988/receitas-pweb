@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <link href="estilo.css" rel="stylesheet">
+      <meta charset="UTF-8">
+      <style>
+         table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+         }
+      </style>
+   </head>
+
+   <body>
+      <div><button id="botaoCarregar">Carregando cervejas...</button></div>
+      <div id="cervejasDiv"></div>
+   </body>
+
+   <script>
+
+      let cervejas = [
+         {
+            name: "Guiness",
+            alcohol: "10%"
+         },
+         {
+            name: "Desperados",
+            alcohol: "6%"
+         },
+         {
+            name: "Becks",
+            alcohol: "5%"
+         }
+      ]
+
+      // cs é um array de cervejas
+      const carregarDiv = cs => {
+         const div = document.getElementById("cervejasDiv")
+
+         // Mapeia cada objeto do array para uma linha de tabela (<tr>)
+         const linhasHtml = cs.map( item => `<tr><td>${item['name']}</td><td>${item['alcohol']}</td></tr>` )
+
+         // Monta a estrutura da tabela com o cabeçalho solicitado
+         const tabelaHtml = `
+            <table>
+               <thead>
+                  <tr>
+                     <th>Nome</th>
+                     <th>Álcool</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  ${linhasHtml.join("\n")}
+               </tbody>
+            </table>
+         `
+
+         div.innerHTML = tabelaHtml
+      }
+
+      let botao = document.getElementById("botaoCarregar")
+      botao.addEventListener("click", () => carregarDiv(cervejas) )
+
+   </script>
+</html>
