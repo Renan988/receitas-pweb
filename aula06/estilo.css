@@ -8,7 +8,7 @@ body {
    align-items: center;
 }
 
-/* Container do botão ajustado com classe camelCase */
+/* Container do botão em camelCase */
 .botaoContainer {
    margin-bottom: 20px;
 }
@@ -38,7 +38,7 @@ body {
 /* Container da Tabela */
 #cervejasDiv {
    width: 100%;
-   max-width: 500px;
+   max-width: 650px;
 }
 
 /* Estilização da Tabela */
@@ -70,17 +70,12 @@ td {
    font-size: 15px;
 }
 
-/* Efeito zebra */
-tbody tr:nth-child(even) {
+/* Classe personalizada em camelCase para efeito zebra */
+tr.linhaPar {
    background-color: #f9fafb;
 }
 
 /* Efeito hover na linha */
 tbody tr:hover {
    background-color: #f3f4f6;
-}
-
-/* Remoção da borda da última linha */
-tbody tr:last-child td {
-   border-bottom: none;
 }
