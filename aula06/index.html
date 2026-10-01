@@ -44,15 +44,14 @@
     ]
 
     // cs é um array de cervejas
-    const carregarTabela = (cs, elementoId = "cervejasDiv") => {
+    const carregarTabela = (cs, elementoId = "cervejasDiv", cabecalhos = ["Nome", "Álcool", "Estilo", "IBU"], propiedades = ["name", "alcohol", "style", "ibu"]) => {
         const div = document.getElementById(elementoId)
+        const cabecalhosHtml = cabecalhos.map(item => `<th>${item}</th>`).join("\n")
 
         const linhasHtml = cs.map( (item) => {
-            return `
-               <td>${item['name']}</td>
-               <td>${item['alcohol']}</td>
-               <td>${item['style']}</td>
-               <td>${item['ibu']}</td>
+            const propriedadesHtml = propiedades.map(prop => `<td>${item[prop]}</td>`).join("\n")
+            return `<tr>
+               ${propriedadesHtml}
             </tr>`
          })
 
