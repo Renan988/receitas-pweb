@@ -1,0 +1,25 @@
+#Pokemons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.pokemon-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    width: 140px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-card img {
+    width: 96px;
+    height: 96px;
+}
+
+.pokemon-card strong {
+    text-transform: capitalize;
+    display: block;
+}
