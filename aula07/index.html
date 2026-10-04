@@ -10,44 +10,39 @@
 </head>
 
 <body>
-    <div><button id="botaoCarregar">Carregar Pokemons</button></div>
+    <div><button id="botaoCarregar">Carregar Pokémons</button></div>
     <div id="Pokemons"></div>
 </body>
 
-<script>
+<script type="module">
+    import { carregarTabela } from './tabela.js';
 
     let Pokemons = []
-
-    const carregarDiv = cs => {
-        const div = document.getElementById("Pokemons")
-
-        const itensHtml = cs.map(item => `
-            <div class="pokemon-card">
-                <img src="${item.sprites.front_shiny}" alt="${item.name}">
-                <div>#${item.id}</div>
-                <strong>${item.name}</strong>
-                <small>${item.types.map(t => t.type.name).join(', ')}</small>
-            </div>
-        `)
-
-        div.innerHTML = `${itensHtml.join("\n")}`
-    }
 
     async function carregarPokemons() {
         try {
             document.getElementById("Pokemons").innerHTML = "<div>Carregando...</div>"
 
             let res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-            Pokemons = await res.json()
+            let Pokemons = await res.json()
 
             const promessasDetalhes = Pokemons.results.map(async (item) => {
                 let resDetalhes = await fetch(item.url)
                 return await resDetalhes.json()
             })
 
-            const detalhesPokemons = await Promise.all(promessasDetalhes)
+            const pokemonsDetalhados = await Promise.all(promessasDetalhes)
 
-            carregarDiv(detalhesPokemons)
+            carregarTabela(pokemonsDetalhados, "Pokemons", [
+                { chave: "id", titulo: "ID" },
+                { chave: "name", titulo: "Nome" },
+                { chave: "types", titulo: "Tipos", formatar: (val) => val.map((t) => t.type.name).join(', ') },
+                { chave: "sprites", titulo: "Imagem", formatar: (val) => `<img src="${val.front_default}" alt="Imagem do Pokémon">` },
+                {chave: "height", titulo: "Altura", formatar: (val) => `${val / 10} m`},
+                {chave: "weight", titulo: "Peso", formatar: (val) => `${val / 10} kg`},
+            ]);
+
+            
 
         } catch (err) {
             document.getElementById("Pokemons").innerHTML = `<div>Erro ao carregar Pokemons: ${err.message}</div>`
