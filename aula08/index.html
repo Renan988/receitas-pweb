@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemons</title>
+</head>
+
+<body>
+    <div><button id="botaoCarregar">Carregar Pokémons</button></div>
+    <div id="Pokemons"></div>
+</body>
+
+<script type="module">
+    import { carregarTabela } from './tabela.js';
+
+    let Pokemons = []
+
+    function carregarPokemons() {
+        // Exibe mensagem de carregamento inicial
+        document.getElementById("Pokemons").innerHTML = "<div>Carregando...</div>";
+
+        // 1. Faz a primeira requisição para buscar a lista dos 151 pokémons
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+            .then(res => res.json())
+            .then(data => {
+                // 2. Mapeia o array de resultados em um array de Promises de requisições de detalhes
+                const promessasDetalhes = data.results.map(item => 
+                    fetch(item.url).then(resDetalhes => resDetalhes.json())
+                );
+
+                // 3. Aguarda a resolução de todas as requisições paralelas
+                return Promise.all(promessasDetalhes);
+            })
+            .then(pokemonsDetalhados => {
+                // 4. Renderiza a tabela assim que todos os detalhes retornarem
+                carregarTabela(pokemonsDetalhados, "Pokemons", [
+                    { chave: "id", titulo: "ID" },
+                    { chave: "name", titulo: "Nome" },
+                    { chave: "types", titulo: "Tipos", formatar: (val) => val.map((t) => t.type.name).join(', ') },
+                    { chave: "sprites", titulo: "Imagem", formatar: (val) => `<img src="${val.front_default}" alt="Imagem do Pokémon">` },
+                    { chave: "height", titulo: "Altura", formatar: (val) => `${val / 10} m` },
+                    { chave: "weight", titulo: "Peso", formatar: (val) => `${val / 10} kg` },
+                ]);
+            })
+            .catch(err => {
+                // Captura qualquer erro ao longo do encadeamento
+                document.getElementById("Pokemons").innerHTML = `<div>Erro ao carregar Pokemons: ${err.message}</div>`;
+            });
+    }
+
+    let botao = document.getElementById("botaoCarregar");
+    botao.addEventListener("click", () => carregarPokemons());
+
+</script>
+
+</html>
