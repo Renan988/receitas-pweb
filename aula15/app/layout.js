@@ -13,7 +13,8 @@ export default function RootLayout({ children }) {
         <div>
           <h3>Menu Principal</h3>
           <Link href="/">Home</Link> |{' '}
-          <Link href="/novarota">Nova Rota</Link>
+          <Link href="/novarota">Nova Rota</Link> |{' '}
+          <Link href="/outrarota">Outra Rota</Link>
         </div>
         <hr />
         {children}
