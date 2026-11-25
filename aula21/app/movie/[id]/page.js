@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export async function generateStaticParams() {
   return [
     { id: 'tt0095801' },
@@ -17,6 +19,9 @@ export default async function Home({ params }) {
       <h1>
         {movie.Title} ({movie.Year})
       </h1>
+      {movie.Poster && movie.Poster !== 'N/A' && (
+        <Image src={movie.Poster} alt={movie.Title} width={300} height={450} unoptimized />
+      )}
       <p>Director: {movie.Director}</p>
       <p>Plot: {movie.Plot}</p>
     </div>
