@@ -1,0 +1,81 @@
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #fafafa;
+  color: #222;
+}
+
+nav {
+  margin-bottom: 16px;
+}
+
+nav a {
+  color: #0070f3;
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 16px 0 24px;
+}
+
+.search-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+.search-form input,
+.search-form select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.search-form button {
+  padding: 8px 16px;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.movies-table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.movies-table th,
+.movies-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: left;
+}
+
+.movies-table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
+
+.movies-table img {
+  width: 48px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 3px;
+}
